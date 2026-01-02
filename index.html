@@ -312,7 +312,7 @@
                 });
             }
             return shuffleArray(pool).slice(0, 50);
-        };
+        }; // FIXED: Missing closing brace
 
         const generateOrdinalScramblePool = () => {
             const templates = [
@@ -339,10 +339,10 @@
             return pool;
         };
 
-        // --- Unit 5 題庫生成 (擴充至50題) ---
+        // --- Unit 5 題庫生成 (擴充至100題) ---
         const generateUnit5QuizPool = () => {
             const pool = [
-                // 1. 詢問交通方式 (How...)
+                // 1. 詢問交通方式 (How...) - 20題
                 { q: "______ do you go to school?", options: ["How", "What", "Where"], ans: "How", hint: "詢問「如何」去某地，使用 How。" },
                 { q: "How ______ she go to the park?", options: ["does", "do", "is"], ans: "does", hint: "主詞是 She (第三人稱單數)，助動詞用 does。" },
                 { q: "How ______ they get to the zoo?", options: ["do", "does", "are"], ans: "do", hint: "主詞是 They (複數)，助動詞用 do。" },
@@ -353,8 +353,18 @@
                 { q: "______ does Mary go to the library?", options: ["How", "What", "Where"], ans: "How", hint: "詢問方式。" },
                 { q: "How do you ______ to the island?", options: ["get", "gets", "getting"], ans: "get", hint: "do 後面接原形動詞。" },
                 { q: "How ______ the teacher go to school?", options: ["does", "do", "is"], ans: "does", hint: "Teacher 是單數。" },
+                { q: "How ______ your brother go to the gym?", options: ["does", "do", "is"], ans: "does", hint: "Brother 是單數。" },
+                { q: "How ______ Alice and Bob go to the party?", options: ["do", "does", "are"], ans: "do", hint: "Alice and Bob 是複數。" },
+                { q: "______ can I get to the museum?", options: ["How", "What", "Where"], ans: "How", hint: "詢問如何到達。" },
+                { q: "How ______ the dog go home?", options: ["does", "do", "is"], ans: "does", hint: "Dog 是單數。" },
+                { q: "How ______ you go to Taipei 101?", options: ["do", "are", "does"], ans: "do", hint: "You 用 do。" },
+                { q: "______ does he go to the supermarket?", options: ["How", "What", "Who"], ans: "How", hint: "詢問交通方式。" },
+                { q: "How do ______ go to the beach?", options: ["they", "he", "she"], ans: "they", hint: "助動詞是 do，主詞用複數 they。" },
+                { q: "How does ______ go to the mountains?", options: ["she", "they", "we"], ans: "she", hint: "助動詞是 does，主詞用單數 she。" },
+                { q: "How ______ Mr. Lin go to work?", options: ["does", "do", "is"], ans: "does", hint: "Mr. Lin 是單數。" },
+                { q: "How ______ the boys go to the park?", options: ["do", "does", "are"], ans: "do", hint: "The boys 是複數。" },
 
-                // 2. 交通方式 (by vs take/ride)
+                // 2. 交通方式 (by vs take/ride/drive) - 30題
                 { q: "We go to Taipei ______ train.", options: ["by", "in", "on"], ans: "by", hint: "by + 交通工具 (不加冠詞)。" },
                 { q: "He goes to work ______ car.", options: ["by", "in", "on"], ans: "by", hint: "by + 交通工具 (不加冠詞)。" },
                 { q: "They go to the zoo ______ foot.", options: ["on", "by", "in"], ans: "on", hint: "走路固定用 on foot。" },
@@ -370,8 +380,23 @@
                 { q: "Don't go there ______ foot. It's too far.", options: ["on", "by", "with"], ans: "on", hint: "on foot (走路)。" },
                 { q: "We can ______ a boat to the island.", options: ["take", "by", "go"], ans: "take", hint: "take a boat。" },
                 { q: "He ______ his scooter to the park.", options: ["rides", "takes", "drives"], ans: "rides", hint: "騎機車用 rides。" },
+                { q: "Do you go to school ______ bus?", options: ["by", "on", "in"], ans: "by", hint: "by bus。" },
+                { q: "My mom ______ me to school.", options: ["drives", "rides", "takes"], ans: "drives", hint: "開車載某人用 drives。" },
+                { q: "They ______ a plane to Japan.", options: ["take", "ride", "by"], ans: "take", hint: "搭飛機 take a plane。" },
+                { q: "Can we go there ______ ship?", options: ["by", "on", "in"], ans: "by", hint: "by ship。" },
+                { q: "He walks to school. He goes to school ______ foot.", options: ["on", "by", "in"], ans: "on", hint: "走路 on foot。" },
+                { q: "She never ______ a taxi.", options: ["takes", "take", "by"], ans: "takes", hint: "She takes。" },
+                { q: "Let's ______ the metro.", options: ["take", "by", "go"], ans: "take", hint: "搭捷運 take the metro。" },
+                { q: "I like to ______ my bike.", options: ["ride", "drive", "take"], ans: "ride", hint: "騎車 ride。" },
+                { q: "They go to Kaohsiung ______ HSR.", options: ["by", "on", "in"], ans: "by", hint: "by HSR (高鐵)。" },
+                { q: "Do you want to ______ a bus?", options: ["take", "by", "go"], ans: "take", hint: "take a bus。" },
+                { q: "He goes to the park ______ bike.", options: ["by", "on", "in"], ans: "by", hint: "by bike。" },
+                { q: "My sister ______ the bus to school.", options: ["takes", "rides", "drives"], ans: "takes", hint: "搭公車 takes the bus。" },
+                { q: "Is it faster to go ______ taxi?", options: ["by", "on", "in"], ans: "by", hint: "by taxi。" },
+                { q: "They ______ a boat across the river.", options: ["took", "by", "on"], ans: "took", hint: "搭船 took a boat (過去式)。" },
+                { q: "We can go there ______ scooter.", options: ["by", "on", "in"], ans: "by", hint: "by scooter。" },
 
-                // 3. 問路與指引 (How to get to / Imperatives)
+                // 3. 問路與指引 (How to get to / Imperatives) - 25題
                 { q: "How can I ______ to the station?", options: ["get", "go", "take"], ans: "get", hint: "到達用 get to。" },
                 { q: "______ straight for two blocks.", options: ["Go", "Going", "To go"], ans: "Go", hint: "祈使句用原形動詞 Go 開頭。" },
                 { q: "______ down this road.", options: ["Walk", "Walking", "To walk"], ans: "Walk", hint: "祈使句用原形動詞 Walk 開頭。" },
@@ -382,8 +407,23 @@
                 { q: "______ left at the corner.", options: ["Turn", "Go", "Walk"], ans: "Turn", hint: "左轉 Turn left。" },
                 { q: "Go straight ______ one block.", options: ["for", "to", "at"], ans: "for", hint: "持續一個街區用 for。" },
                 { q: "Can you ______ me the way?", options: ["tell", "say", "speak"], ans: "tell", hint: "告訴我路 tell me the way。" },
+                { q: "______ along this street and turn left.", options: ["Walk", "Walking", "To walk"], ans: "Walk", hint: "祈使句用原形 Walk。" },
+                { q: "The bank is on ______ right.", options: ["your", "you", "yours"], ans: "your", hint: "on your right (在你的右手邊)。" },
+                { q: "Go ______ three blocks.", options: ["for", "to", "at"], ans: "for", hint: "走三個街區 Go for..." },
+                { q: "______ the street at the light.", options: ["Cross", "Across", "Crossing"], ans: "Cross", hint: "穿越街道 Cross the street (動詞)。" },
+                { q: "Stop ______ the red light.", options: ["at", "on", "in"], ans: "at", hint: "停在... Stop at。" },
+                { q: "Go down this road ______ two blocks.", options: ["for", "to", "at"], ans: "for", hint: "持續兩條街用 for。" },
+                { q: "______ right and you will see it.", options: ["Turn", "Go", "Walk"], ans: "Turn", hint: "右轉 Turn right。" },
+                { q: "It is ______ your left.", options: ["on", "in", "at"], ans: "on", hint: "在左邊 on your left。" },
+                { q: "Can you show me the ______?", options: ["way", "road", "street"], ans: "way", hint: "指路 show me the way。" },
+                { q: "Don't ______ left here.", options: ["turn", "turning", "turns"], ans: "turn", hint: "助動詞 Don't 後接原形。" },
+                { q: "Go ______ this street.", options: ["along", "long", "with"], ans: "along", hint: "沿著 Go along。" },
+                { q: "It's ______ the corner.", options: ["around", "round", "about"], ans: "around", hint: "就在轉角附近 around the corner。" },
+                { q: "______ straight and stop at the bank.", options: ["Go", "Walks", "Going"], ans: "Go", hint: "祈使句用 Go。" },
+                { q: "How ______ we get to the zoo?", options: ["can", "are", "is"], ans: "can", hint: "How can we...?" },
+                { q: "Please ______ me the map.", options: ["show", "see", "look"], ans: "show", hint: "給我看 show me。" },
 
-                // 4. 方位介系詞 (Prepositions)
+                // 4. 方位介系詞 (Prepositions) - 25題
                 { q: "The bank is ______ the post office and the park.", options: ["between", "among", "next"], ans: "between", hint: "在 A 和 B 之間用 between。" },
                 { q: "The school is ______ from the library.", options: ["across", "next", "between"], ans: "across", hint: "在...對面用 across from。" },
                 { q: "It is on the ______ of First St. and Main St.", options: ["corner", "block", "side"], ans: "corner", hint: "在轉角用 on the corner of。" },
@@ -398,42 +438,37 @@
                 { q: "There is a 7-11 ______ the corner.", options: ["on", "in", "to"], ans: "on", hint: "在轉角 on the corner。" },
                 { q: "The river is ______ the school.", options: ["behind", "between", "next"], ans: "behind", hint: "在...後面 behind。" },
                 { q: "Is the bank ______ to the market?", options: ["next", "near", "across"], ans: "next", hint: "next to。" },
-                { q: "The library is ______ First Street.", options: ["on", "in", "at"], ans: "on", hint: "在街道上用 on。" }
+                { q: "The library is ______ First Street.", options: ["on", "in", "at"], ans: "on", hint: "在街道上用 on。" },
+                { q: "I sit ______ John and Mary.", options: ["between", "next", "across"], ans: "between", hint: "在兩者之間 between。" },
+                { q: "The ball is ______ the box.", options: ["in", "on", "at"], ans: "in", hint: "在...裡面 in。" },
+                { q: "There is a park ______ from my house.", options: ["across", "next", "near"], ans: "across", hint: "across from (對面)。" },
+                { q: "The cat is ______ the sofa.", options: ["on", "in", "at"], ans: "on", hint: "在...上面 on。" },
+                { q: "My school is next ______ the park.", options: ["to", "of", "from"], ans: "to", hint: "next to。" },
+                { q: "He stands in front ______ the door.", options: ["of", "off", "to"], ans: "of", hint: "in front of。" },
+                { q: "The kite is ______ the sky.", options: ["in", "on", "at"], ans: "in", hint: "在天空中用 in the sky。" },
+                { q: "Is there a bank ______ here?", options: ["near", "next", "between"], ans: "near", hint: "在附近 near here。" },
+                { q: "The restaurant is on the ______.", options: ["corner", "middle", "between"], ans: "corner", hint: "on the corner。" },
+                { q: "Who is standing ______ you?", options: ["behind", "between", "across"], ans: "behind", hint: "在你後面 behind you。" }
             ];
 
             return shuffleArray(pool);
         };
 
-        // --- Unit 5 重組生成器 (嚴格對應文法重點句子) ---
-        const generateUnit5ScramblePool = () => {
-             const pool = [
-                // 交通
-                { id: "u5-g1", sentence: "How do you go to school?", sentence_ch: "你如何去學校？" },
-                { id: "u5-g2", sentence: "I take a bus to school.", sentence_ch: "我搭公車去學校。" },
-                { id: "u5-g3", sentence: "She goes to the park by bike.", sentence_ch: "她騎腳踏車去公園。" },
-                { id: "u5-g4", sentence: "They go to the zoo on foot.", sentence_ch: "他們走路去動物園。" },
-                { id: "u5-g5", sentence: "He rides a motorcycle to work.", sentence_ch: "他騎機車去上班。" },
-                
-                // 問路與指引
-                { id: "u5-g6", sentence: "How do I get to the station?", sentence_ch: "我該如何到達車站？" },
-                { id: "u5-g7", sentence: "Go straight for two blocks.", sentence_ch: "直走兩個街區。" },
-                { id: "u5-g8", sentence: "Turn left at the bank.", sentence_ch: "在銀行左轉。" },
-                { id: "u5-g9", sentence: "Walk along the river for one block.", sentence_ch: "沿著河邊走一個街區。" },
-                
-                // 方位
-                { id: "u5-g10", sentence: "The bank is between the hotel and the park.", sentence_ch: "銀行在飯店和公園之間。" },
-                { id: "u5-g11", sentence: "The library is across from the school.", sentence_ch: "圖書館在學校對面。" },
-                { id: "u5-g12", sentence: "It is on the corner of First Street.", sentence_ch: "它在第一街的轉角處。" },
-                { id: "u5-g13", sentence: "The post office is next to the police station.", sentence_ch: "郵局在警察局旁邊。" },
-                { id: "u5-g14", sentence: "My house is on Green Road.", sentence_ch: "我家在綠色路上。" }
-            ];
-            return shuffleArray(pool);
+        // --- Unit 5 重組生成器 (改為使用新單字例句) ---
+        const generateUnit5ScramblePool = (vocabData) => {
+            // 自動從 Vocab Data 生成重組題目
+            if (!vocabData) return [];
+            return vocabData.map((item, index) => ({
+                id: `u5-sc-${index}`,
+                sentence: item.sentence.replace(/A: |B: /g, ''), // 移除對話標籤 A: B: 避免混淆
+                sentence_ch: item.sentence_ch.replace(/A: |B: /g, '')
+            }));
         };
 
-        // --- Unit 6 題庫生成 (擴充至50題) ---
+        // --- Unit 6 題庫生成 (擴充至100題) ---
         const generateUnit6QuizPool = () => {
             const pool = [
-                // 1. 未來式 (will)
+                // 1. 未來式 (will) - 25題
                 { q: "I ______ visit my grandma tomorrow.", options: ["will", "am", "did"], ans: "will", hint: "明天 (tomorrow) 用未來式 will。" },
                 { q: "He ______ not go to the party.", options: ["will", "is", "does"], ans: "will", hint: "未來式否定 will not。" },
                 { q: "______ you come with us?", options: ["Will", "Do", "Are"], ans: "Will", hint: "未來式疑問句用 Will 開頭。" },
@@ -449,8 +484,18 @@
                 { q: "Mom ______ cook dinner tonight.", options: ["will", "is", "does"], ans: "will", hint: "今晚將會煮晚餐。" },
                 { q: "They ______ be happy.", options: ["will", "are", "do"], ans: "will", hint: "他們將會很高興。" },
                 { q: "Who ______ win the game?", options: ["will", "is", "does"], ans: "will", hint: "誰將會贏？" },
+                { q: "______ it be sunny tomorrow?", options: ["Will", "Is", "Does"], ans: "Will", hint: "明天會是晴天嗎？" },
+                { q: "I ______ call you later.", options: ["will", "am", "do"], ans: "will", hint: "我晚點會打給你。" },
+                { q: "She ______ not like the gift.", options: ["will", "is", "does"], ans: "will", hint: "她將不會喜歡這個禮物。" },
+                { q: "Maybe it ______ snow.", options: ["will", "is", "does"], ans: "will", hint: "也許會下雪。" },
+                { q: "______ they come to the party?", options: ["Will", "Do", "Are"], ans: "Will", hint: "他們會來嗎？" },
+                { q: "The bus ______ arrive soon.", options: ["will", "is", "does"], ans: "will", hint: "公車快到了。" },
+                { q: "We ______ study hard.", options: ["will", "are", "do"], ans: "will", hint: "我們會努力讀書。" },
+                { q: "There ______ be a test tomorrow.", options: ["will", "is", "has"], ans: "will", hint: "明天會有考試 (will be)。" },
+                { q: "What ______ happen?", options: ["will", "is", "does"], ans: "will", hint: "會發生什麼事？" },
+                { q: "I promise I ______ help you.", options: ["will", "am", "do"], ans: "will", hint: "我承諾我會幫你。" },
 
-                // 2. 未來式 (be going to)
+                // 2. 未來式 (be going to) - 25題
                 { q: "She ______ going to buy a dress.", options: ["is", "will", "does"], ans: "is", hint: "be going to 句型，She 配 is。" },
                 { q: "We ______ going to play soccer.", options: ["are", "will", "do"], ans: "are", hint: "be going to 句型，We 配 are。" },
                 { q: "What ______ you going to do?", options: ["are", "do", "will"], ans: "are", hint: "What are you going to...?" },
@@ -461,8 +506,23 @@
                 { q: "Where ______ she going to go?", options: ["is", "does", "will"], ans: "is", hint: "She 配 is。" },
                 { q: "______ you going to eat?", options: ["Are", "Do", "Will"], ans: "Are", hint: "You 配 Are。" },
                 { q: "My friends ______ going to come.", options: ["are", "is", "will"], ans: "are", hint: "Friends (複數) 配 are。" },
+                { q: "Who ______ going to help me?", options: ["is", "are", "will"], ans: "is", hint: "Who 當主詞通常視為單數 is。" },
+                { q: "The boys ______ going to run.", options: ["are", "is", "will"], ans: "are", hint: "Boys 配 are。" },
+                { q: "I am ______ to sleep.", options: ["going", "go", "will"], ans: "going", hint: "be going to。" },
+                { q: "Are they ______ to visit us?", options: ["going", "go", "will"], ans: "going", hint: "Are... going to...?" },
+                { q: "Is Mom ______ to cook?", options: ["going", "go", "will"], ans: "going", hint: "Is... going to...?" },
+                { q: "We are ______ to have fun.", options: ["going", "go", "will"], ans: "going", hint: "We are going to..." },
+                { q: "What ______ they going to eat?", options: ["are", "is", "will"], ans: "are", hint: "They 配 are。" },
+                { q: "______ John going to play?", options: ["Is", "Are", "Will"], ans: "Is", hint: "John 配 Is。" },
+                { q: "They aren't ______ to leave.", options: ["going", "go", "will"], ans: "going", hint: "aren't going to。" },
+                { q: "I'm not ______ to buy it.", options: ["going", "go", "will"], ans: "going", hint: "not going to。" },
+                { q: "When ______ you going to start?", options: ["are", "is", "will"], ans: "are", hint: "You 配 are。" },
+                { q: "Where ______ he going to stay?", options: ["is", "are", "will"], ans: "is", hint: "He 配 is。" },
+                { q: "______ it going to be hot?", options: ["Is", "Are", "Will"], ans: "Is", hint: "It 配 Is。" },
+                { q: "You ______ going to be late.", options: ["are", "is", "will"], ans: "are", hint: "You are going to..." },
+                { q: "My sister ______ going to dance.", options: ["is", "are", "will"], ans: "is", hint: "Sister 配 is。" },
 
-                // 3. 花費金錢 (cost/spend/pay)
+                // 3. 花費金錢 (cost/spend/pay) - 25題
                 { q: "The watch ______ me 5000 dollars.", options: ["cost", "spent", "paid"], ans: "cost", hint: "物品 (The watch) 當主詞，用 cost。" },
                 { q: "I ______ 100 dollars on the book.", options: ["spent", "cost", "paid"], ans: "spent", hint: "人 (I) 當主詞，後面接 on，用 spent。" },
                 { q: "He ______ 200 dollars for the ticket.", options: ["paid", "cost", "spent"], ans: "paid", hint: "人 (He) 當主詞，後面接 for，用 paid。" },
@@ -478,8 +538,18 @@
                 { q: "The trip will ______ a lot.", options: ["cost", "spend", "pay"], ans: "cost", hint: "物品/事情 (Trip) 當主詞，用 cost。" },
                 { q: "She ______ all her money on shoes.", options: ["spent", "cost", "paid"], ans: "spent", hint: "spend money on..." },
                 { q: "Can I ______ by credit card?", options: ["pay", "cost", "spend"], ans: "pay", hint: "付款用 pay。" },
+                { q: "The bike ______ him 2000 dollars.", options: ["cost", "spent", "paid"], ans: "cost", hint: "物品 cost 人 錢。" },
+                { q: "He ______ 500 dollars on the game.", options: ["spent", "cost", "took"], ans: "spent", hint: "人 spent 錢 on..." },
+                { q: "How much does the hat ______?", options: ["cost", "pay", "spend"], ans: "cost", hint: "物品當主詞用 cost。" },
+                { q: "I ______ cash for the dinner.", options: ["paid", "spent", "cost"], ans: "paid", hint: "pay cash for..." },
+                { q: "This computer ______ too much.", options: ["costs", "pays", "spends"], ans: "costs", hint: "物品 costs。" },
+                { q: "They ______ a lot on travel.", options: ["spend", "cost", "pay"], ans: "spend", hint: "spend on..." },
+                { q: "Did she ______ for the coffee?", options: ["pay", "cost", "spend"], ans: "pay", hint: "pay for..." },
+                { q: "It ______ me 100 dollars.", options: ["cost", "spent", "paid"], ans: "cost", hint: "It cost me..." },
+                { q: "We ______ 300 dollars buying gifts.", options: ["spent", "cost", "paid"], ans: "spent", hint: "spent + 錢 + V-ing。" },
+                { q: "Please ______ at the counter.", options: ["pay", "cost", "spend"], ans: "pay", hint: "結帳用 pay。" },
 
-                // 4. 花費時間 (take/spend)
+                // 4. 花費時間 (take/spend) - 25題
                 { q: "It ______ me ten minutes to walk home.", options: ["took", "spent", "cost"], ans: "took", hint: "虛主詞 It 開頭表花時間，用 took/takes。" },
                 { q: "It takes one hour ______ cook dinner.", options: ["to", "for", "in"], ans: "to", hint: "It takes 時間 to V (不定詞)。" },
                 { q: "He spent two hours ______ TV.", options: ["watching", "watch", "to watch"], ans: "watching", hint: "人 spend 時間 V-ing (動名詞)。" },
@@ -489,35 +559,102 @@
                 { q: "I ______ an hour cleaning my room.", options: ["spent", "took", "cost"], ans: "spent", hint: "人當主詞，花時間用 spent。" },
                 { q: "It takes time ______ learn English.", options: ["to", "for", "in"], ans: "to", hint: "to + 原形動詞。" },
                 { q: "She spends time ______ the piano.", options: ["practicing", "practice", "to practice"], ans: "practicing", hint: "spend + 時間 + V-ing。" },
-                { q: "Does it ______ long?", options: ["take", "spend", "cost"], ans: "take", hint: "It 當主詞，用 take。" }
+                { q: "Does it ______ long?", options: ["take", "spend", "cost"], ans: "take", hint: "It 當主詞，用 take。" },
+                { q: "It ______ her 5 years to finish the book.", options: ["took", "spent", "paid"], ans: "took", hint: "It took..." },
+                { q: "Do you ______ much time on your phone?", options: ["spend", "take", "cost"], ans: "spend", hint: "人 spend time on..." },
+                { q: "It ______ 20 minutes to drive there.", options: ["takes", "spends", "costs"], ans: "takes", hint: "It takes..." },
+                { q: "They ______ the weekend camping.", options: ["spent", "took", "cost"], ans: "spent", hint: "人 spent 時間 V-ing (camping)。" },
+                { q: "How much time did you ______?", options: ["spend", "take", "cost"], ans: "spend", hint: "人 did you spend?" },
+                { q: "It will ______ a long time.", options: ["take", "spend", "pay"], ans: "take", hint: "It will take..." },
+                { q: "I ______ 10 minutes waiting for the bus.", options: ["spent", "took", "cost"], ans: "spent", hint: "人 spent 時間 V-ing。" },
+                { q: "It ______ two hours to fly to Japan.", options: ["takes", "spends", "costs"], ans: "takes", hint: "It takes..." },
+                { q: "He ______ his free time reading.", options: ["spends", "takes", "costs"], ans: "spends", hint: "人 spends 時間 V-ing。" },
+                { q: "Did it ______ you a long time?", options: ["take", "spend", "cost"], ans: "take", hint: "Did it take you...?" },
+                { q: "Don't ______ time playing games.", options: ["spend", "take", "cost"], ans: "spend", hint: "人 spend time V-ing。" },
+                { q: "It ______ only a few seconds.", options: ["takes", "spends", "costs"], ans: "takes", hint: "It takes..." },
+                { q: "She ______ all night studying.", options: ["spent", "took", "cost"], ans: "spent", hint: "人 spent 時間 V-ing。" },
+                { q: "How long does it ______?", options: ["take", "spend", "cost"], ans: "take", hint: "It 當主詞用 take。" },
+                { q: "It ______ me an hour to fix it.", options: ["took", "spent", "paid"], ans: "took", hint: "It took me..." }
             ];
             return shuffleArray(pool);
         };
 
-        // --- Unit 6 重組生成器 (嚴格對應文法重點句子) ---
-        const generateUnit6ScramblePool = () => {
-            const pool = [
-                // 未來式
-                { id: "u6-g1", sentence: "I will wear a sweater tomorrow.", sentence_ch: "我明天會穿毛衣。" },
-                { id: "u6-g2", sentence: "He won't go camping this weekend.", sentence_ch: "他這個週末不會去露營。" },
-                { id: "u6-g3", sentence: "Will you go to the party?", sentence_ch: "你會去派對嗎？" },
-                { id: "u6-g4", sentence: "She is going to practice the guitar.", sentence_ch: "她打算練習吉他。" },
-                { id: "u6-g5", sentence: "What are you going to do?", sentence_ch: "你打算做什麼？" },
-                
-                // 花費金錢
-                { id: "u6-g6", sentence: "The dress cost me one thousand dollars.", sentence_ch: "這件洋裝花了我一千元。" },
-                { id: "u6-g7", sentence: "She spent five hundred dollars on the shoes.", sentence_ch: "她花五百元買這雙鞋。" },
-                { id: "u6-g8", sentence: "I paid two hundred dollars for the book.", sentence_ch: "我付了兩百元買這本書。" },
-                { id: "u6-g9", sentence: "How much did the ticket cost?", sentence_ch: "這張票多少錢？" },
-                
-                // 花費時間
-                { id: "u6-g10", sentence: "It took me three hours to drive there.", sentence_ch: "開車去那裡花了我三個小時。" },
-                { id: "u6-g11", sentence: "It takes ten minutes to walk to school.", sentence_ch: "走到學校需要十分鐘。" },
-                { id: "u6-g12", sentence: "They spent two hours watching the movie.", sentence_ch: "他們花了兩小時看這部電影。" },
-                { id: "u6-g13", sentence: "I spend a lot of time reading books.", sentence_ch: "我花很多時間看書。" }
-            ];
-            return shuffleArray(pool);
+        // --- Unit 6 重組生成器 (改為使用新單字例句) ---
+        const generateUnit6ScramblePool = (vocabData) => {
+             // 自動從 Vocab Data 生成重組題目
+            if (!vocabData) return [];
+            return vocabData.map((item, index) => ({
+                id: `u6-sc-${index}`,
+                sentence: item.sentence.replace(/A: |B: /g, ''), // 移除對話標籤 A: B: 避免混淆
+                sentence_ch: item.sentence_ch.replace(/A: |B: /g, '')
+            }));
         };
+
+        // --- Unit 5 單字資料 ---
+        const unit5VocabData = [
+            { id: "u5-1", word: "metro", part: "n.", chinese: "捷運", sentence: "You can go there by bus or metro.", sentence_ch: "你可以搭公車或捷運去那裡。" },
+            { id: "u5-2", word: "lost", part: "adj.", chinese: "迷路的", sentence: "I got lost on the way to the train station.", sentence_ch: "我在去火車站的路上迷路了。" },
+            { id: "u5-3", word: "map", part: "n.", chinese: "地圖", sentence: "We are lost. We need a map now.", sentence_ch: "我們迷路了。我們現在需要地圖。" },
+            { id: "u5-4", word: "ask", part: "v.", chinese: "請求；詢問", sentence: "You can ask your friends to help you.", sentence_ch: "你可以請求你的朋友幫你。" },
+            { id: "u5-5", word: "Excuse me", part: "phr.", chinese: "對不起；請問...", sentence: "Excuse me. Where is the bathroom?", sentence_ch: "不好意思。請問廁所在哪裡？" },
+            { id: "u5-6", word: "straight", part: "adv.; adj.", chinese: "直地；直的", sentence: "Turn right at the hospital and keep going straight.", sentence_ch: "在醫院右轉並繼續直走。" },
+            { id: "u5-7", word: "turn left", part: "phr.", chinese: "向左轉", sentence: "Turn left on First Street, and the shop is on the corner.", sentence_ch: "在第一街左轉，商店就在轉角處。" },
+            { id: "u5-8", word: "along", part: "prep.", chinese: "沿著", sentence: "There are many flowers along the river.", sentence_ch: "沿著河邊有很多花。" },
+            { id: "u5-9", word: "block", part: "n.", chinese: "街區", sentence: "My good friend and I live on the same block.", sentence_ch: "我的好朋友和我住在同一個街區。" },
+            { id: "u5-10", word: "corner", part: "n.", chinese: "轉角；角落", sentence: "Jackie's house is on the corner of Apple Street and Cherry Road.", sentence_ch: "Jackie的家在Apple Street和Cherry Road的轉角。" },
+            { id: "u5-11", word: "across from", part: "phr.", chinese: "在...的對面", sentence: "Stacy is sitting across from Justin and Alex.", sentence_ch: "Stacy正坐在Justin和Alex的對面。" },
+            { id: "u5-12", word: "supermarket", part: "n.", chinese: "超市", sentence: "Gina goes to the supermarket every Saturday.", sentence_ch: "Gina每個星期六都去超市。" },
+            { id: "u5-13", word: "ground", part: "n.", chinese: "地面", sentence: "Be careful! There is a bug on the ground.", sentence_ch: "小心！地上有一隻蟲。" },
+            { id: "u5-14", word: "sir", part: "n.", chinese: "先生", sentence: "Good morning, sir. May I help you?", sentence_ch: "早安，先生。我可以幫你嗎？" },
+            { id: "u5-15", word: "on foot", part: "phr.", chinese: "步行", sentence: "The flower shop is close. Let's go there on foot.", sentence_ch: "花店很近。我們走路去那裡吧。" },
+            { id: "u5-16", word: "take", part: "v.", chinese: "搭乘 (交通工具)", sentence: "We can take a taxi or a bus, but not the metro.", sentence_ch: "我們可以搭計程車或公車，但不能搭捷運。" },
+            { id: "u5-32", word: "go jogging", part: "phr.", chinese: "慢跑", sentence: "He goes jogging in the morning before he goes to work.", sentence_ch: "他在上班前會去慢跑。" },
+            { id: "u5-33", word: "go sailing", part: "phr.", chinese: "玩帆船；航行", sentence: "Let's go sailing in August during summer vacation.", sentence_ch: "讓我們在暑假的八月去玩帆船吧。" },
+            { id: "u5-34", word: "go surfing", part: "phr.", chinese: "衝浪", sentence: "Did you often go surfing with your friend?", sentence_ch: "你經常和你的朋友去衝浪嗎？" },
+            { id: "u5-35", word: "fly", part: "v.", chinese: "飛行；駕駛", sentence: "My uncle can fly a plane.", sentence_ch: "我的叔叔會開飛機。" },
+            { id: "u5-36", word: "bus stop", part: "n.", chinese: "公車站", sentence: "Let's wait for Alice at the bus stop.", sentence_ch: "讓我們在公車站等Alice。" },
+            { id: "u5-37", word: "go biking", part: "phr.", chinese: "騎單車", sentence: "Many people like to go biking at the park.", sentence_ch: "許多人喜歡在公園騎單車。" },
+            { id: "u5-38", word: "go shopping", part: "phr.", chinese: "購物", sentence: "They want to go shopping for clothes this afternoon.", sentence_ch: "他們今天下午想去買衣服。" },
+            { id: "u5-39", word: "hit", part: "v.; n.", chinese: "碰撞；打擊", sentence: "The man was using his phone when his car hit the tree.", sentence_ch: "當車子撞到樹時，那個人正在用手機。" },
+            { id: "u5-40", word: "sound", part: "n.", chinese: "聲音", sentence: "What is that strange sound? Oh, it's our dog.", sentence_ch: "那奇怪的聲音是什麼？喔，是我們的狗。" },
+            { id: "u5-41", word: "bell", part: "n.", chinese: "鐘；鈴", sentence: "Do you have a bell on your bicycle?", sentence_ch: "你的腳踏車上有鈴鐺嗎？" },
+            { id: "u5-42", word: "experience", part: "n.; v.", chinese: "經歷；經驗", sentence: "People learn from their past experience.", sentence_ch: "人們從過去的經驗中學習。" },
+            { id: "u5-43", word: "wonderful", part: "adj.", chinese: "美好的", sentence: "I had a wonderful time at the party yesterday.", sentence_ch: "我昨天在派對上玩得很開心。" },
+            { id: "u5-44", word: "play", part: "n.", chinese: "戲劇", sentence: "How many plays did William Shakespeare write?", sentence_ch: "威廉·莎士比亞寫了多少部戲劇？" },
+            { id: "u5-45", word: "around", part: "adv.", chinese: "大約", sentence: "Brandon got home around nine thirty last night.", sentence_ch: "Brandon昨晚大約九點半回到家。" }
+        ];
+
+        // --- 新增：Unit 6 單字資料 ---
+        const unit6VocabData = [
+            { id: "u6-1", word: "will", part: "aux.", chinese: "將", sentence: "I will be late for class today.", sentence_ch: "我今天上課將會遲到。" },
+            { id: "u6-2", word: "ugly", part: "adj.", chinese: "醜的", sentence: "This pair of shoes is ugly.", sentence_ch: "這雙鞋子很醜。" },
+            { id: "u6-3", word: "sweater", part: "n.", chinese: "毛衣", sentence: "My favorite sweater is the pink one.", sentence_ch: "我最喜歡的毛衣是粉紅色的那件。" },
+            { id: "u6-4", word: "tonight", part: "adv.; n.", chinese: "今晚", sentence: "Let's go to the baseball game tonight.", sentence_ch: "我們今晚去看棒球賽吧。" },
+            { id: "u6-5", word: "funny", part: "adj.", chinese: "滑稽的", sentence: "Ted made a funny face.", sentence_ch: "Ted 做了一個滑稽的鬼臉。" },
+            { id: "u6-6", word: "cost", part: "v.; n.", chinese: "價錢為；花費", sentence: "The belt cost me 500 NT dollars.", sentence_ch: "這條皮帶花了我五百元台幣。" },
+            { id: "u6-7", word: "price", part: "n.", chinese: "價格", sentence: "What is the price of the popcorn?", sentence_ch: "爆米花的價格是多少？" },
+            { id: "u6-8", word: "spend", part: "v.", chinese: "花費 (時間、金錢)", sentence: "I spend a lot of time at home.", sentence_ch: "我在家花了很多時間。" },
+            { id: "u6-9", word: "expensive", part: "adj.", chinese: "昂貴的", sentence: "The guitar is too expensive. I don't have that much money.", sentence_ch: "這把吉他太貴了。我沒有那麼多錢。" },
+            { id: "u6-10", word: "on sale", part: "phr.", chinese: "特價中", sentence: "These notebooks are on sale now. They are only 10 dollars each.", sentence_ch: "這些筆記本現在特價中。每本只要10元。" },
+            { id: "u6-11", word: "pair", part: "n.", chinese: "(一)雙；(一)對", sentence: "Evans wants to buy a new pair of running shoes.", sentence_ch: "Evans 想要買一雙新的慢跑鞋。" },
+            { id: "u6-12", word: "total", part: "n.; adj.", chinese: "總計 (的)；全部 (的)", sentence: "The total number of horses on the farm is 12.", sentence_ch: "農場裡的馬總數是十二隻。" },
+            { id: "u6-13", word: "pay", part: "v.; n.", chinese: "付費；工資", sentence: "I will pay you back tomorrow.", sentence_ch: "我明天會還你錢。" },
+            { id: "u6-14", word: "thousand", part: "n.", chinese: "千", sentence: "There are about two thousand students in the school.", sentence_ch: "學校裡大約有兩千名學生。" },
+            { id: "u6-15", word: "tomorrow", part: "adv.; n.", chinese: "明天", sentence: "Bella is coming to my house tomorrow.", sentence_ch: "Bella 明天要來我家。" },
+            { id: "u6-16", word: "high", part: "adj.", chinese: "高的", sentence: "What animals live in high mountains?", sentence_ch: "什麼動物住在高山上？" },
+            { id: "u6-17", word: "save", part: "v.", chinese: "節省", sentence: "We can save time by taking the bus.", sentence_ch: "我們可以搭公車節省時間。" },
+            { id: "u6-18", word: "would like", part: "phr.", chinese: "想要", sentence: "I would like to have some cookies with tea.", sentence_ch: "我想要吃些餅乾配茶。" },
+            { id: "u6-19", word: "change", part: "n.", chinese: "找零", sentence: "Here is your change.", sentence_ch: "這是你的找零。" },
+            { id: "u6-20", word: "take", part: "v.", chinese: "花費 (時間)", sentence: "It took me half an hour to clean up the room.", sentence_ch: "打掃房間花了我半小時。" },
+            { id: "u6-38", word: "fast", part: "adj.; adv.", chinese: "快的；快地", sentence: "Thomas is a fast swimmer.", sentence_ch: "Thomas 是個游泳很快的人。" },
+            { id: "u6-39", word: "low", part: "adj.", chinese: "低的", sentence: "The water in the river is low in summer.", sentence_ch: "夏天河裡的水位很低。" },
+            { id: "u6-40", word: "cheap", part: "adj.", chinese: "便宜的", sentence: "The shop sells cheap bags. Let's take a look.", sentence_ch: "這家店賣便宜的包包。我們去看看吧。" },
+            { id: "u6-41", word: "what's more", part: "phr.", chinese: "而且", sentence: "Lily is good at dancing, and what's more, her paintings are beautiful.", sentence_ch: "Lily 擅長跳舞，而且，她的畫也很美。" },
+            { id: "u6-42", word: "most", part: "adj.", chinese: "大部分的", sentence: "Most people in the country love watching soccer games.", sentence_ch: "這個國家大部分的人喜歡看足球賽。" },
+            { id: "u6-43", word: "hurt", part: "v.", chinese: "傷害", sentence: "I was riding my bike when I hurt my leg.", sentence_ch: "當我弄傷我的腿時，我正在騎腳踏車。" },
+            { id: "u6-44", word: "come off", part: "phr.", chinese: "從...脫落", sentence: "Why is the paint coming off the walls?", sentence_ch: "為什麼牆上的油漆正在剝落？" },
+            { id: "u6-45", word: "second", part: "n.", chinese: "秒", sentence: "Can you please give me a second?", sentence_ch: "可以請你給我一秒鐘（等我一下）嗎？" }
+        ];
 
         // --- 資料庫 (在此處定義，確保前面的生成函式已存在) ---
         const UNITS_DATA = {
@@ -549,10 +686,7 @@
             },
             unit5: {
                 title: "Unit 5",
-                vocab: [
-                    { id: "u5-1", word: "metro", part: "n.", chinese: "捷運", sentence: "You can go there by bus or metro.", sentence_ch: "你可以搭公車或捷運去那裡。" },
-                    // ... (省略部分單字資料以節省空間，功能邏輯不變)
-                ],
+                vocab: unit5VocabData,
                 grammar: {
                     tips: [
                         { label: "by + 交通工具", text: "by bus, by car (中間不能加 a/the)" },
@@ -581,15 +715,12 @@
                         }
                     ],
                     quiz: generateUnit5QuizPool(),
-                    scramble: generateUnit5ScramblePool()
+                    scramble: generateUnit5ScramblePool(unit5VocabData) // 使用新的生成器，傳入單字資料
                 }
             },
             unit6: {
                 title: "Unit 6",
-                vocab: [
-                    { id: "u6-1", word: "will", part: "aux.", chinese: "將", sentence: "I will be late for class today.", sentence_ch: "我今天上課將會遲到。" },
-                    // ... (省略部分單字資料以節省空間，功能邏輯不變)
-                ],
+                vocab: unit6VocabData,
                 grammar: {
                     tips: [
                         { label: "看到時間詞", text: "tomorrow, next week → 用未來式 will 或 be going to" },
@@ -621,7 +752,7 @@
                         }
                     ],
                     quiz: generateUnit6QuizPool(),
-                    scramble: generateUnit6ScramblePool()
+                    scramble: generateUnit6ScramblePool(unit6VocabData)
                 }
             }
         };
@@ -958,7 +1089,7 @@
                 const wrongPart = userSentence.slice(firstWrongIndex);
                 const targetIdPrefix = `${firstWrongIndex}-`;
                 let nextWordObj = wrongPart.find(w => w.id.startsWith(targetIdPrefix));
-                let newAvailable = [...availableWords];
+                let newAvailable = [...newAvailable, ...others];
                 if (nextWordObj) {
                     const others = wrongPart.filter(w => w.id !== nextWordObj.id);
                     newAvailable = [...newAvailable, ...others];
