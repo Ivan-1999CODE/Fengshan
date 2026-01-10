@@ -1077,34 +1077,59 @@
             const handleWordClick = (wordObj) => { if (feedback === 'correct') return; if (feedback === 'wrong') setFeedback(null); setAvailableWords(prev => prev.filter(w => w.id !== wordObj.id)); setUserSentence(prev => [...prev, wordObj]); };
             const handleAnswerClick = (wordObj) => { if (feedback === 'correct') return; if (feedback === 'wrong') setFeedback(null); setUserSentence(prev => prev.filter(w => w.id !== wordObj.id)); setAvailableWords(prev => [...prev, wordObj]); };
             const handleTryAgain = () => { setFeedback(null); setShowHelperHint(true); setTimeout(() => setShowHelperHint(false), 5000); };
+            
+            // --- 修正後的魔法棒功能 ---
             const handleMagicHint = () => {
                 if (feedback === 'correct') return;
                 setFeedback(null); 
+                
+                // 1. 找出第一個錯誤的位置
                 let firstWrongIndex = -1;
-                for (let i = 0; i < userSentence.length; i++) { if (!userSentence[i].id.startsWith(`${i}-`)) { firstWrongIndex = i; break; } }
+                for (let i = 0; i < userSentence.length; i++) { 
+                    if (!userSentence[i].id.startsWith(`${i}-`)) { 
+                        firstWrongIndex = i; 
+                        break; 
+                    } 
+                }
                 if (firstWrongIndex === -1) firstWrongIndex = userSentence.length;
-                const totalWords = userSentence.length + availableWords.length;
-                if (firstWrongIndex >= totalWords) return;
-                const correctPart = userSentence.slice(0, firstWrongIndex);
-                const wrongPart = userSentence.slice(firstWrongIndex);
+
+                // 2. 尋找這個位置應該是哪個字 (ID 前綴為 index-)
                 const targetIdPrefix = `${firstWrongIndex}-`;
-                let nextWordObj = wrongPart.find(w => w.id.startsWith(targetIdPrefix));
-                let newAvailable = [...newAvailable, ...others];
-                if (nextWordObj) {
-                    const others = wrongPart.filter(w => w.id !== nextWordObj.id);
-                    newAvailable = [...newAvailable, ...others];
-                } else {
-                    nextWordObj = availableWords.find(w => w.id.startsWith(targetIdPrefix));
-                    if (nextWordObj) {
-                        newAvailable = newAvailable.filter(w => w.id !== nextWordObj.id);
-                        newAvailable = [...newAvailable, ...wrongPart];
-                    }
+                
+                // 先在「候選區」找
+                let nextWordObj = availableWords.find(w => w.id.startsWith(targetIdPrefix));
+                let isFromAvailable = true;
+
+                // 如果候選區沒有，就在「已選區」(但在錯誤位置的) 找
+                if (!nextWordObj) {
+                    nextWordObj = userSentence.find(w => w.id.startsWith(targetIdPrefix));
+                    isFromAvailable = false;
                 }
-                if (nextWordObj) {
-                    setUserSentence([...correctPart, nextWordObj]);
-                    setAvailableWords(newAvailable);
-                    speakText(nextWordObj.text);
+
+                // 如果都找不到 (理論上不應該發生，除非題目長度不對)，就結束
+                if (!nextWordObj) return;
+
+                // 3. 重新構建狀態
+                // 正確的部分保留
+                const correctPart = userSentence.slice(0, firstWrongIndex);
+                
+                // 原本在已選區但位置錯誤的字 (除了我們要移到正確位置的那個字以外)，全部退回候選區
+                // 取得目前 userSentence 中，從 firstWrongIndex 開始的所有字
+                const wrongPartWords = userSentence.slice(firstWrongIndex);
+                // 這些字如果要退回，需要排除掉 nextWordObj (因為它要被放到正確位置)
+                const wordsReturningToPool = wrongPartWords.filter(w => w.id !== nextWordObj.id);
+
+                // 新的候選區 = 原本候選區 (扣除 nextWordObj 如果它來自這) + 退回的字
+                let newAvailable = [...availableWords];
+                if (isFromAvailable) {
+                    newAvailable = newAvailable.filter(w => w.id !== nextWordObj.id);
                 }
+                newAvailable = [...newAvailable, ...wordsReturningToPool];
+
+                // 更新狀態
+                setUserSentence([...correctPart, nextWordObj]);
+                setAvailableWords(newAvailable);
+                speakText(nextWordObj.text);
             };
 
             const handleGiveUpClick = () => { setFeedback(null); setShowGiveUpConfirm(true); };
